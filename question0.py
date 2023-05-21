@@ -8,7 +8,9 @@ Research Question 0
 # All Importations
 import pandas as pd
 import geopandas as gpd
+import matplotlib as mpl
 import matplotlib.pyplot as plt
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 
 def load_data():
@@ -49,32 +51,43 @@ def show_time_periods(data):
 
 def load_and_merge(global_price, world_json):
     '''
-    T
+    This function loads two files and merges
+    both of them so that it can be easily plotted
+    using the module Geopandas. 
     '''
     global_data = pd.read_csv(global_price)
     world_data = gpd.read_file(world_json)
 
-
     merged_country_name = world_data.merge(global_data, left_on='name', right_on='Country_Name', how='inner')
+    merged_country_name['Amount'] = merged_country_name['Amount'].astype(float)
     print(merged_country_name)
     return (world_data, merged_country_name)
 
 
 def plot_data(world_data, merged_data):
+    '''
+    This function takes the merged data and plots
+    it using geopandas. It plots the bread price
+    per country on a global map. 
+    '''
     fig, axs = plt.subplots(1, figsize=(10,10))
     world_data.plot(ax=axs, color='#CCCCCC')
-    merged_data.plot(ax=axs, column='Amount', legend=True)
+    divider = make_axes_locatable(axs)
+    cax = divider.append_axes("right", size="50%", pad=0.1)
+    merged_data.plot(ax=axs, column='Amount', colormap='hot', legend=True, cax=cax)
     axs.set_title('Bread Prices around the Globe')
     fig.savefig('Global_Bread_Prices', bbox_inches='tight')
+
+
     
 
 def main():
-  data = load_data()
-  show_time_periods(data)
+    data = load_data()
+    show_time_periods(data)
 
-  world_data, merged_data = load_and_merge('datasets/bread_price_global.csv', 'datasets/world.json')
-  plot_data(world_data, merged_data)
+    world_data, merged_data = load_and_merge('datasets/bread_price_global.csv', 'datasets/world.json')
+    plot_data(world_data, merged_data)
 
 
 if __name__ == "__main__":
-  main()
+    main()
