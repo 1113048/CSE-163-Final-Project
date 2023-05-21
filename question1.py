@@ -9,6 +9,7 @@ import pandas as pd
 import geopandas as gpd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 
 bread_prices = pd.read_csv('datasets/bread_price_spain.csv')
 inflation_rates = pd.read_csv('datasets/inflation_rate_spain.csv')
@@ -20,7 +21,7 @@ def inflationvsprice():
     
     '''
     fig = plt.figure()
-    ax = fig.add_subplot(projection='3d')
+    ax = fig.add_subplot(111, projection='3d')
     merged_price = bread_prices.merge(inflation_rates, left_on='date', right_on='date', how='inner')
     merged_rate = inflation_rates.merge(bread_prices, left_on='date', right_on='date', how='inner')
     merged_price['date'] = pd.to_datetime(merged_price['date'])
@@ -28,6 +29,7 @@ def inflationvsprice():
     x_var = merged_rate['Inflation']
     y_var = merged_price['date']
     z_var = merged_price['COST']
+    ax.scatter3D(x_var, y_var, z_var, 'blue')
     ax.plot3D(x_var, y_var, z_var, 'blue')
     ax.set_title('Inflation vs. Bread Price in Spain')
     ax.set_xlabel('Inflaton Rate (%)')
@@ -37,7 +39,19 @@ def inflationvsprice():
     fig.savefig('InflationVsCostSpain.png')
 
 def gdpvsprice():
-    pass
+    merged_price = bread_prices.merge(gdp_per_capita, left_on='date', right_on='date', how='inner')
+    merged_rate = gdp_per_capita.merge(bread_prices, left_on='date', right_on='date', how='inner')
+    print(merged_price)
+    print(merged_rate)
+    GDP, COST = np.polyfit(merged_rate['GDP'],merged_price['COST'], 1)
+    plt.figure(figsize=(10,6))
+    plt.scatter(merged_rate['GDP'],merged_price['COST'])
+    plt.plot(merged_rate['GDP'], GDP*merged_rate['GDP']+COST)
+    plt.title('GDP Per Capita vs. Bread Price in Spain')
+    plt.xlabel('GDP Per Capita')
+    plt.ylabel('Price (Spanish Peseta)')
+    plt.grid(True)
+    plt.savefig('GDPvsCostSpain.png')
     
 
 def unemploymentvsprice():
@@ -46,6 +60,7 @@ def unemploymentvsprice():
     print(merged_price)
     print(merged_rate)
     plt.figure(figsize=(10,6))
+    plt.bar(merged_rate['Unemployment'], merged_price['COST'])
     plt.scatter(merged_rate['Unemployment'], merged_price['COST'])
     plt.title('Unemployment vs. Bread Price in Spain')
     plt.xlabel('Unemployment Rate (%)')
@@ -78,6 +93,7 @@ def unemploymentvsprice():
 def main():
     inflationvsprice()
     unemploymentvsprice()
+    gdpvsprice()
 
 if __name__ == '__main__':
     main()
