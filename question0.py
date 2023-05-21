@@ -73,8 +73,8 @@ def plot_data(world_data, merged_data):
     fig, axs = plt.subplots(1, figsize=(10,10))
     world_data.plot(ax=axs, color='#CCCCCC')
     divider = make_axes_locatable(axs)
-    cax = divider.append_axes("right", size="50%", pad=0.1)
-    merged_data.plot(ax=axs, column='Amount', colormap='hot', legend=True, cax=cax)
+    cax = divider.append_axes("right", size="5%", pad=0.1)
+    merged_data.plot(ax=axs, column='Amount', cmap='hot', legend=True, cax=cax)
     axs.set_title('Bread Prices around the Globe')
     fig.savefig('Global_Bread_Prices', bbox_inches='tight')
 
