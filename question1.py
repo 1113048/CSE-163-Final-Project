@@ -68,27 +68,6 @@ def unemploymentvsprice():
     plt.grid(True)
     plt.savefig('UnemploymentVsCostSpain.png')
 
-'''
-def unemploymentvsprice():
-    fig = plt.figure()
-    ax = fig.add_subplot(projection='3d')
-    merged_price = bread_prices.merge(unemployment_rates, left_on='date', right_on='date', how='inner')
-    merged_rate = unemployment_rates.merge(bread_prices, left_on='date', right_on='date', how='inner')
-    merged_price['date'] = pd.to_datetime(merged_price['date'])
-    merged_price['date'] = merged_price['date'].dt.year * 10000 + merged_price['date'].dt.month * 100 + merged_price['date'].dt.day
-    x_var = merged_rate['Unemployment']
-    y_var = merged_price['date']
-    z_var = merged_price['COST']
-    ax.plot3D(x_var, y_var, z_var, 'blue')
-    ax.scatter(x_var, y_var, z_var, 'gray')
-    ax.set_title('Unemployment vs. Bread Price in Spain')
-    ax.set_xlabel('Unemployment Rate (%)')
-    ax.set_ylabel('Date')
-    ax.set_zlabel('Price (Spanish Peseta)')
-    ax.view_init(elev=30, azim=45)
-    fig.savefig('UnemploymentVsCostSpain.png')
-'''
-
 
 def main():
     inflationvsprice()
