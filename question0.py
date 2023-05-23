@@ -46,7 +46,7 @@ def show_time_periods(data):
     plt.xlabel('Year') 
     plt.ylabel('Price of Bread')
     plt.legend()
-    plt.savefig('Bread_Price_Over_Intervals.png')
+    plt.savefig('plots/Bread_Price_Over_Intervals.png')
 
 
 def load_and_merge(global_price, world_json):
@@ -60,7 +60,6 @@ def load_and_merge(global_price, world_json):
 
     merged_country_name = world_data.merge(global_data, left_on='name', right_on='Country_Name', how='inner')
     merged_country_name['Amount'] = merged_country_name['Amount'].astype(float)
-    print(merged_country_name)
     return (world_data, merged_country_name)
 
 
@@ -76,7 +75,7 @@ def plot_data(world_data, merged_data):
     cax = divider.append_axes("right", size="5%", pad=0.1)
     merged_data.plot(ax=axs, column='Amount', legend=True, cax=cax)
     axs.set_title('Bread Prices around the Globe')
-    fig.savefig('Global_Bread_Prices', bbox_inches='tight')
+    fig.savefig('plots/Global_Bread_Prices.png', bbox_inches='tight')
 
 
     

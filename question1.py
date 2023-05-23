@@ -31,15 +31,14 @@ def inflationvsprice():
     x_var = merged_rate['Inflation']
     y_var = merged_price['date']
     z_var = merged_price['COST']
-    ax.scatter3D(x_var, y_var, z_var, color='peru')
-    ax.plot3D(x_var, y_var, (COST) * z_var + INFLATION, color='chocolate')
+    ax.scatter3D(x_var, y_var, z_var, color='chocolate')
     ax.set_title('Inflation vs. Bread Price in Spain')
     ax.set_xlabel('Inflaton Rate (%)')
     ax.set_ylabel('Date')
     ax.set_zlabel('Price (Spanish Peseta)')
     ax.view_init(elev=30, azim=45)
     ax.legend(['Price Growth'])
-    fig.savefig('InflationVsCostSpain.png')
+    fig.savefig('plots/InflationVsCostSpain.png')
 
 def inflationchangevsprice():
     merged_price = bread_prices.merge(inflation_rates, left_on='date', right_on='date', how='inner')
@@ -52,7 +51,7 @@ def inflationchangevsprice():
     plt.xlabel('Inflation Rate Change Yearly')
     plt.ylabel('Price (Spanish Peseta)')
     plt.legend('Price Growth')
-    plt.savefig('InflationChangeVsCost.png')
+    plt.savefig('plots/InflationChangeVsCost.png')
 
 
 def gdpvsprice():
@@ -68,7 +67,7 @@ def gdpvsprice():
     plt.xlabel('GDP Per Capita')
     plt.ylabel('Price (Spanish Peseta)')
     plt.grid(True)
-    plt.savefig('GDPvsCostSpain.png')
+    plt.savefig('plots/GDPvsCostSpain.png')
     
 
 def unemploymentvsprice():
@@ -83,7 +82,8 @@ def unemploymentvsprice():
     plt.xlabel('Unemployment Rate (%)')
     plt.ylabel('Price (Spanish Peseta)')
     plt.grid(True)
-    plt.savefig('UnemploymentVsCostSpain.png')
+    plt.savefig('plots/UnemploymentVsCostSpain.png')
+
 
 
 def main():
