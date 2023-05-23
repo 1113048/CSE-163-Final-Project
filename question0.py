@@ -42,6 +42,7 @@ def show_time_periods(data):
     ]
     for period in time_periods:
         period_data = data[(data['Year'] >= str(period['start'])) & (data['Year'] <= str(period['end']))]
+        # Plotting Data
         plt.plot(period_data['Year'], period_data['Average price'], label=f"{period['start']}-{period['end']}")
     plt.xlabel('Year') 
     plt.ylabel('Price of Bread')
@@ -70,6 +71,7 @@ def plot_data(world_data, merged_data):
     per country on a global map. 
     '''
     fig, axs = plt.subplots(1, figsize=(10,10))
+    # Plotting Data
     world_data.plot(ax=axs, color='#CCCCCC')
     divider = make_axes_locatable(axs)
     cax = divider.append_axes("right", size="5%", pad=0.1)

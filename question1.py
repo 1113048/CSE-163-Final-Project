@@ -19,7 +19,9 @@ unemployment_rates = pd.read_csv('datasets/unemployment_rate_spain.csv')
 
 def inflationvsprice():
     '''
-    
+    This method plots on a 3-D line plot the correlation
+    between inflation, time, and the price of bread in
+    the country of Spain.
     '''
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
@@ -30,6 +32,7 @@ def inflationvsprice():
     x_var = merged_rate['Inflation']
     y_var = merged_price['date']
     z_var = merged_price['COST']
+    # Plotting Data
     ax.scatter3D(x_var, y_var, z_var, color='chocolate')
     ax.set_title('Inflation vs. Bread Price in Spain')
     ax.set_xlabel('Inflaton Rate (%)')
@@ -40,10 +43,16 @@ def inflationvsprice():
     fig.savefig('plots/InflationVsCostSpain.png')
 
 def inflationchangevsprice():
+    '''
+    This method plots on a line plot the rate of
+    change in inflation in comparison to the
+    price of bread in the country of Spain.
+    '''
     merged_price = bread_prices.merge(inflation_rates, left_on='date', right_on='date', how='inner')
     merged_rate = inflation_rates.merge(bread_prices, left_on='date', right_on='date', how='inner')
     plt.figure(figsize=(10,6))
     plt.step(merged_rate['Change'],merged_price['COST'], color='chocolate')
+    # Plotting Data
     plt.title('Inflation Rate Change vs. Bread Price in Spain')
     plt.xlabel('Inflation Rate Change Yearly')
     plt.ylabel('Price (Spanish Peseta)')
@@ -52,11 +61,18 @@ def inflationchangevsprice():
 
 
 def gdpvsprice():
+    '''
+    This method plots a scatter plot as well
+    as a line of best fit. This plot compares
+    GDP per capita and the price of bread in
+    the country of Spain.
+    '''
     merged_price = bread_prices.merge(gdp_per_capita, left_on='date', right_on='date', how='inner')
     merged_rate = gdp_per_capita.merge(bread_prices, left_on='date', right_on='date', how='inner')
     GDP, COST = np.polyfit(merged_rate['GDP'],merged_price['COST'], 1)
     plt.figure(figsize=(10,6))
     plt.scatter(merged_rate['GDP'],merged_price['COST'], color='peru')
+    # Plotting Data
     plt.plot(merged_rate['GDP'], GDP*merged_rate['GDP']+COST, color='chocolate')
     plt.title('GDP Per Capita vs. Bread Price in Spain')
     plt.xlabel('GDP Per Capita')
@@ -66,9 +82,15 @@ def gdpvsprice():
     
 
 def unemploymentvsprice():
+    '''
+    This method plots a bar chart that compares
+    the unemployment rates to the price of
+    bread in the country of Spain.
+    '''
     merged_price = bread_prices.merge(unemployment_rates, left_on='date', right_on='date', how='inner')
     merged_rate = unemployment_rates.merge(bread_prices, left_on='date', right_on='date', how='inner')
     plt.figure(figsize=(10,6))
+    # Plotting Data
     plt.bar(merged_rate['Unemployment'], merged_price['COST'], color='chocolate')
     plt.scatter(merged_rate['Unemployment'], merged_price['COST'], color='peru')
     plt.title('Unemployment vs. Bread Price in Spain')

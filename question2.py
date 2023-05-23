@@ -1,7 +1,7 @@
 '''
 Yashwant Datti & Sathvik Chilakala
 CSE 163 Final Project
-Research Question 3
+Research Question 2
 '''
 
 class BreadPredictor:
@@ -11,6 +11,11 @@ class BreadPredictor:
     self.scalerY = MinMaxScaler()
 
   def load_data(self):    
+    '''
+    This method loads the required datasets for 
+    the bread price prediction and puts them
+    all into dataframes.
+    '''
     import pandas as pd
     BREAD_PRICE = pd.read_csv("datasets/monthly_bread.csv")
     GDP = pd.read_csv("datasets/monthly_gdp.csv")
@@ -22,6 +27,11 @@ class BreadPredictor:
     return BREAD_PRICE, GDP, IMPORTS, INFLATION, UNEMPLOYMENT, WAGE, EXPORTS
   
   def preprocess_data(self, BREAD_PRICE, GDP, IMPORTS, INFLATION, UNEMPLOYMENT, WAGE, EXPORTS):
+    '''
+    This method preprocesses the data for training 
+    the bread price prediction model by splitting
+    the datasets.
+    '''
     from sklearn.model_selection import train_test_split
     import numpy as np
     df_X = np.stack((np.array(GDP['GDP'].values), np.array(IMPORTS['IMPORTS'].values), np.array(EXPORTS['EXPORTS'].values),
@@ -35,6 +45,11 @@ class BreadPredictor:
     return xtr, xtt, ytr, ytt
 
   def build_model(self):
+    '''
+    This method builds the bread price prediction 
+    model using Keras, which is a part of the 
+    machine learning library TensorFlow.
+    '''
     from keras import layers
     from keras.models import Sequential
     model = Sequential()
@@ -46,12 +61,21 @@ class BreadPredictor:
     return model
 
   def fit_save_model(self, model, xtr, ytr, xtt, ytt, model_name):
+    '''
+    This method trains the bread price prediction model 
+    and saves it to a file.
+    '''
     from keras.callbacks import EarlyStopping
     monitor = EarlyStopping(monitor='val_loss', min_delta=1e-3, patience=10, verbose=1, mode="auto", restore_best_weights=True)
     model.fit(xtr, ytr, validation_data=(xtt, ytt), verbose=2, epochs=200, callbacks=[monitor])
     model.save(model_name)
 
   def evaluate_model(self, model, xtt, ytt, model_name):
+    '''
+    This method evaluates the bread price prediction 
+    model and displays the evaluation metrics to the
+    console.
+    '''
     import sklearn.metrics as sm
     import matplotlib.pyplot as plt
     from keras import models
@@ -67,6 +91,11 @@ class BreadPredictor:
     plt.savefig("MLplots/ModelAccuracy.png")
 
   def test_future_values(self, gdp, imports, exports, inflation, wage, unemployment, model_name):
+    '''
+    This method takes in the future values of the
+    inputs given and predicts the label based
+    on the given features.
+    '''
     from keras import models
     x = [[gdp, imports, exports, inflation, wage, unemployment]]
     x = self.scalerX.transform(x)
@@ -144,6 +173,7 @@ if __name__ == "__main__":
       inflation=INFLATION["INFLATION"].iloc[-1].tolist(),wage=WAGE["WAGE"].iloc[-1].tolist(),unemployment=UNEMPLOYMENT["UNEMPLOYMENT"].iloc[-1].tolist()+i, model_name="Model.h5")
     exports_future.append(prediction)
   
+  # Plotting Data
   fig, ax = plt.subplots(3,2)
   fig.tight_layout(h_pad=2)
   ax[0,0].plot(gdp_future,color="red")
