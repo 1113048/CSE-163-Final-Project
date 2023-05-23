@@ -7,9 +7,9 @@ Cloning:
 In order to clone this dataset for further use in Visual Studio Code, click the three dots on the upper right hand screen and copy the url. If you have git downloaded, you will be able to paste the link into Visual Studio Code and clone the repository. 
 
 Running:
-Once cloned, in order to run the files there are many dependencies to download for the code to run smoothly. Dependencies for this certain project range from Pandas to TensorFlow. You can download all the dependencies in the Visual Studio Code terminal with the command: 
+Once cloned, in order to run the files there are many dependencies to download for the code to run smoothly. Dependencies for this certain project range from Pandas to TensorFlow. You can download all the dependencies in the Visual Studio Code terminal with the command as listed below.
 
-# Installation Steps
+# Additional Installation Steps
 
 1. Clone the repository from GitHub:
 
