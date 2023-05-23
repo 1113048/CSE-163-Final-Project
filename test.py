@@ -2,7 +2,7 @@
 import question0
 import question1
 import question2 
-import question3
+import question2
 import pandas as pd
 from cse163_utils import assert_equals, compare_plots
 
@@ -34,7 +34,7 @@ def check_plots():
 """
 Begin Testing Machine Learning Model
 """
-predictor = question3.BreadPredictor()
+predictor = question2.BreadPredictor()
 BREAD_PRICE, GDP, IMPORTS, INFLATION, UNEMPLOYMENT, WAGE, EXPORTS = predictor.load_data()
 
 def test_ML_load_data():

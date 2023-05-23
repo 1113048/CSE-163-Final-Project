@@ -27,7 +27,6 @@ def inflationvsprice():
     merged_rate = inflation_rates.merge(bread_prices, left_on='date', right_on='date', how='inner')
     merged_price['date'] = pd.to_datetime(merged_price['date'])
     merged_price['date'] = merged_price['date'].dt.year * 10000 + merged_price['date'].dt.month * 100 + merged_price['date'].dt.day
-    INFLATION, COST = np.polyfit(merged_rate['Inflation'], merged_price['COST'], 1)
     x_var = merged_rate['Inflation']
     y_var = merged_price['date']
     z_var = merged_price['COST']
@@ -43,8 +42,6 @@ def inflationvsprice():
 def inflationchangevsprice():
     merged_price = bread_prices.merge(inflation_rates, left_on='date', right_on='date', how='inner')
     merged_rate = inflation_rates.merge(bread_prices, left_on='date', right_on='date', how='inner')
-    print(merged_price)
-    print(merged_rate)
     plt.figure(figsize=(10,6))
     plt.step(merged_rate['Change'],merged_price['COST'], color='chocolate')
     plt.title('Inflation Rate Change vs. Bread Price in Spain')
@@ -57,8 +54,6 @@ def inflationchangevsprice():
 def gdpvsprice():
     merged_price = bread_prices.merge(gdp_per_capita, left_on='date', right_on='date', how='inner')
     merged_rate = gdp_per_capita.merge(bread_prices, left_on='date', right_on='date', how='inner')
-    print(merged_price)
-    print(merged_rate)
     GDP, COST = np.polyfit(merged_rate['GDP'],merged_price['COST'], 1)
     plt.figure(figsize=(10,6))
     plt.scatter(merged_rate['GDP'],merged_price['COST'], color='peru')
@@ -73,8 +68,6 @@ def gdpvsprice():
 def unemploymentvsprice():
     merged_price = bread_prices.merge(unemployment_rates, left_on='date', right_on='date', how='inner')
     merged_rate = unemployment_rates.merge(bread_prices, left_on='date', right_on='date', how='inner')
-    print(merged_price)
-    print(merged_rate)
     plt.figure(figsize=(10,6))
     plt.bar(merged_rate['Unemployment'], merged_price['COST'], color='chocolate')
     plt.scatter(merged_rate['Unemployment'], merged_price['COST'], color='peru')
