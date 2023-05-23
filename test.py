@@ -32,10 +32,10 @@ def check_plots():
     plot is occuring for each method that 
     plots data. 
     '''
-    assert_equals(True, compare_plots('plots/InflationVsCostSpain.png', 'expected/InflationVsCostSpain.png'))
-    assert_equals(True, compare_plots('plots/InflationChangeVsCost.png', 'expected/InflationChangeVsCost.png'))
-    assert_equals(True, compare_plots('plots/GDPvsCostSpain.png', 'expected/GDPvsCostSpain.png'))
-    assert_equals(True, compare_plots('plots/UnemploymentVsCostSpain.png', 'expected/UnemploymentVsCostSpain.png'))
+    assert_equals(True, compare_plots('plots/Inflation_Vs_Cost_Spain.png', 'expected/InflationVsCostSpain.png'))
+    assert_equals(True, compare_plots('plots/Inflation_Change_Vs_Cost.png', 'expected/InflationChangeVsCost.png'))
+    assert_equals(True, compare_plots('plots/GDP_vs_Cost_Spain.png', 'expected/GDPvsCostSpain.png'))
+    assert_equals(True, compare_plots('plots/Unemployment_Vs_Cost_Spain.png', 'expected/UnemploymentVsCostSpain.png'))
     assert_equals(True, compare_plots('plots/Global_Bread_Prices.png', 'expected/Global_Bread_Prices.png'))
     assert_equals(True, compare_plots('plots/Bread_Price_Over_Intervals.png', 'expected/Bread_Price_Over_Intervals.png'))
 
