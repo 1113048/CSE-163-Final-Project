@@ -9,9 +9,6 @@ import matplotlib.pyplot as plt
 
 
 
-price_gambia = pd.read_csv()
-price_gambia = pd.read_csv()
-
 
 def bermudavsgambia():
   fig, ax = (5, 5)

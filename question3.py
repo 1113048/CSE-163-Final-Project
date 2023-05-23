@@ -72,7 +72,7 @@ class BreadPredictor:
 
     plt.plot(ytt)
     plt.plot(ytt_pred)
-    plt.show()
+    plt.savefig("ModelAccuracy.png")
 
   def test_future_values(self, gdp, imports, exports, inflation, wage, unemployment, model_name):
     from keras import models
@@ -91,10 +91,15 @@ if __name__ == "__main__":
   df_x, df_y = predictor.convert_dataframe(x_data, y_data)
 
   # try to visualize your data here
-  import matplotlib.pyplot as plt
-  plt.plot(df_x["Exports"])
-  plt.title("Exports")
-  plt.show()
+  plt.plot(df_x["GDP"], color='red')
+  plt.plot(df_x["Imports"], color='green')
+  plt.plot(df_x["Exports"], color='blue')
+  plt.plot(df_x["Inflation"], color='orange')
+  plt.plot(df_x["Wage"], color='pink')
+  plt.plot(df_x["Unemployment"], color='yellow')
+  plt.title("Features to Predict Bread Price")
+  plt.legend(["GDP", "Imports", "Exports", "Inflation", "Wage", "Unemployment"])
+  plt.savefig("FeaturesPlotted.png")
 
   # building and fitting the model
   model = predictor.build_model()
