@@ -64,7 +64,7 @@ class BreadPredictor:
 
     plt.plot(ytt)
     plt.plot(ytt_pred)
-    plt.savefig("ModelAccuracy.png")
+    plt.savefig("MLplots/ModelAccuracy.png")
 
   def test_future_values(self, gdp, imports, exports, inflation, wage, unemployment, model_name):
     from keras import models
@@ -100,7 +100,7 @@ if __name__ == "__main__":
   ax[2,1].plot(UNEMPLOYMENT["UNEMPLOYMENT"], color='yellow')
   ax[2,1].set_title("Unemployment")
   plt.subplots_adjust(top=0.85)
-  plt.savefig("ShowFeatures.png")
+  plt.savefig("MLplots/ShowFeatures.png")
 
   # building and fitting the model
   # model = predictor.build_model()
@@ -159,7 +159,7 @@ if __name__ == "__main__":
   ax[2,1].plot(unemployment_future, color='yellow')
   ax[2,1].set_title("Unemployment Change")
   plt.subplots_adjust(top=0.85)
-  plt.savefig("PredictedPriceChange.png")
+  plt.savefig("MLplots/PredictedPriceChange.png")
 
 
 
