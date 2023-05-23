@@ -43,7 +43,7 @@ def show_time_periods(data):
     for period in time_periods:
         period_data = data[(data['Year'] >= str(period['start'])) & (data['Year'] <= str(period['end']))]
         plt.plot(period_data['Year'], period_data['Average price'], label=f"{period['start']}-{period['end']}")
-    plt.xlabel('Year')
+    plt.xlabel('Year') 
     plt.ylabel('Price of Bread')
     plt.legend()
     plt.savefig('Bread_Price_Over_Intervals.png')
@@ -74,7 +74,7 @@ def plot_data(world_data, merged_data):
     world_data.plot(ax=axs, color='#CCCCCC')
     divider = make_axes_locatable(axs)
     cax = divider.append_axes("right", size="5%", pad=0.1)
-    merged_data.plot(ax=axs, column='Amount', cmap='hot', legend=True, cax=cax)
+    merged_data.plot(ax=axs, column='Amount', legend=True, cax=cax)
     axs.set_title('Bread Prices around the Globe')
     fig.savefig('Global_Bread_Prices', bbox_inches='tight')
 
