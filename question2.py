@@ -88,7 +88,7 @@ class BreadPredictor:
 
     plt.plot(ytt)
     plt.plot(ytt_pred)
-    plt.savefig("MLplots/ModelAccuracy.png")
+    plt.savefig("MLplots/Model_Accuracy.png")
 
   def test_future_values(self, gdp, imports, exports, inflation, wage, unemployment, model_name):
     '''
@@ -129,7 +129,7 @@ if __name__ == "__main__":
   ax[2,1].plot(UNEMPLOYMENT["UNEMPLOYMENT"], color='yellow')
   ax[2,1].set_title("Unemployment")
   plt.subplots_adjust(top=0.85)
-  plt.savefig("MLplots/ShowFeatures.png")
+  plt.savefig("MLplots/Show_Features.png")
 
   # building and fitting the model
   model = predictor.build_model()
@@ -189,7 +189,7 @@ if __name__ == "__main__":
   ax[2,1].plot(unemployment_future, color='yellow')
   ax[2,1].set_title("Unemployment Change")
   plt.subplots_adjust(top=0.85)
-  plt.savefig("MLplots/PredictedPriceChange.png")
+  plt.savefig("MLplots/Predicted_Price_Change.png")
 
 
 
