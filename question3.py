@@ -4,16 +4,24 @@ CSE 163 Final Project
 Research Question 3
 '''
 
+#imports
+from sklearn.preprocessing import MinMaxScaler
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from keras import layers
+from keras.models import Sequential
+import sklearn.metrics as sm
+import matplotlib.pyplot as plt
+from keras import models
+from keras.callbacks import EarlyStopping
+
 class BreadPredictor:
   def __init__(self):
-    from sklearn.preprocessing import MinMaxScaler
     self.scalerX = MinMaxScaler()
     self.scalerY = MinMaxScaler()
 
   def load_data(self):    
-    import pandas as pd
-    import numpy as np
-
     BREAD_PRICE = pd.read_csv("datasets/monthly_bread.csv")
     GDP = pd.read_csv("datasets/monthly_gdp.csv")
     IMPORTS = pd.read_csv("datasets/monthly_imports.csv")
@@ -32,19 +40,15 @@ class BreadPredictor:
     return df_X, df_Y
   
   def convert_dataframe(self, x_data, y_data):
-    import pandas as pd
     dfX = pd.DataFrame(x_data, columns=["GDP", "Imports", "Exports", "Inflation", "Wage", "Unemployment"])
     dfY = pd.DataFrame(y_data, columns=["Bread"])
     return dfX, dfY
   
   def split_data(self, df_X, df_Y):
-    from sklearn.model_selection import train_test_split
-    xtr, xtt, ytr, ytt = train_test_split(df_X, df_Y, test_size=0.1)
+    xtr, xtt, ytr, ytt = train_test_split(df_X, df_Y, test_size=0.9)
     return xtr, xtt, ytr, ytt
 
   def build_model(self):
-    from keras import layers
-    from keras.models import Sequential
     model = Sequential()
     model.add(layers.Dense(64, input_dim=6))
     model.add(layers.Dense(128, activation='relu'))
@@ -54,15 +58,11 @@ class BreadPredictor:
     return model
 
   def fit_save_model(self, model, xtr, ytr, xtt, ytt, model_name):
-    from keras.callbacks import EarlyStopping
     monitor = EarlyStopping(monitor='val_loss', min_delta=1e-3, patience=10, verbose=1, mode="auto", restore_best_weights=True)
     model.fit(xtr, ytr, validation_data=(xtt, ytt), verbose=2, epochs=200, callbacks=[monitor])
     model.save(model_name)
 
   def evaluate_model(self, model, xtt, ytt, model_name):
-    import sklearn.metrics as sm
-    import matplotlib.pyplot as plt
-    from keras import models
     model = models.load_model(model_name)
     ytt_pred = model.predict(xtt)
     print("Mean absolute error =", round(sm.mean_absolute_error(ytt, ytt_pred), 2))

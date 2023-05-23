@@ -38,6 +38,24 @@ def inflationvsprice():
     ax.view_init(elev=30, azim=45)
     fig.savefig('InflationVsCostSpain.png')
 
+def inflationchangevsprice():
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    merged_price = bread_prices.merge(inflation_rates, left_on='date', right_on='date', how='inner')
+    merged_rate = inflation_rates.merge(bread_prices, left_on='date', right_on='date', how='inner')
+    merged_price['date'] = pd.to_datetime(merged_price['date'])
+    merged_price['date'] = merged_price['date'].dt.year * 10000 + merged_price['date'].dt.month * 100 + merged_price['date'].dt.day
+    x_var = merged_rate['Change']
+    y_var = merged_price['date']
+    z_var = merged_price['COST']
+    ax.scatter3D(x_var, y_var, z_var, 'blue')
+    ax.set_title('Inflation Rate Change vs. Bread Price in Spain')
+    ax.set_xlabel('Inflaton Rate Yearly Change(%)')
+    ax.set_ylabel('Date')
+    ax.set_zlabel('Price (Spanish Peseta)')
+    ax.view_init(elev=30, azim=45)
+    fig.savefig('InflationChangeVsCost.png')
+
 def gdpvsprice():
     merged_price = bread_prices.merge(gdp_per_capita, left_on='date', right_on='date', how='inner')
     merged_rate = gdp_per_capita.merge(bread_prices, left_on='date', right_on='date', how='inner')
@@ -72,6 +90,7 @@ def unemploymentvsprice():
 def main():
     inflationvsprice()
     unemploymentvsprice()
+    inflationchangevsprice()
     gdpvsprice()
 
 if __name__ == '__main__':
