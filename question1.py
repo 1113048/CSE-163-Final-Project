@@ -17,7 +17,7 @@ inflation_rates = pd.read_csv('datasets/inflation_rate_spain.csv')
 gdp_per_capita = pd.read_csv('datasets/gdp_per_capita_spain.csv')
 unemployment_rates = pd.read_csv('datasets/unemployment_rate_spain.csv')
 
-def inflationvsprice():
+def inflation_vs_price():
     '''
     This method plots on a 3-D line plot the correlation
     between inflation, time, and the price of bread in
@@ -40,9 +40,9 @@ def inflationvsprice():
     ax.set_zlabel('Price (Spanish Peseta)')
     ax.view_init(elev=30, azim=45)
     ax.legend(['Price Growth'])
-    fig.savefig('plots/InflationVsCostSpain.png')
+    fig.savefig('plots/Inflation_Vs_Cost_Spain.png')
 
-def inflationchangevsprice():
+def inflation_change_vs_price():
     '''
     This method plots on a line plot the rate of
     change in inflation in comparison to the
@@ -57,10 +57,10 @@ def inflationchangevsprice():
     plt.xlabel('Inflation Rate Change Yearly')
     plt.ylabel('Price (Spanish Peseta)')
     plt.legend('Price Growth')
-    plt.savefig('plots/InflationChangeVsCost.png')
+    plt.savefig('plots/Inflation_Change_Vs_Cost.png')
 
 
-def gdpvsprice():
+def gdp_vs_price():
     '''
     This method plots a scatter plot as well
     as a line of best fit. This plot compares
@@ -78,10 +78,10 @@ def gdpvsprice():
     plt.xlabel('GDP Per Capita')
     plt.ylabel('Price (Spanish Peseta)')
     plt.grid(True)
-    plt.savefig('plots/GDPvsCostSpain.png')
+    plt.savefig('plots/GDP_vs_Cost_Spain.png')
     
 
-def unemploymentvsprice():
+def unemployment_vs_price():
     '''
     This method plots a bar chart that compares
     the unemployment rates to the price of
@@ -97,15 +97,15 @@ def unemploymentvsprice():
     plt.xlabel('Unemployment Rate (%)')
     plt.ylabel('Price (Spanish Peseta)')
     plt.grid(True)
-    plt.savefig('plots/UnemploymentVsCostSpain.png')
+    plt.savefig('plots/Unemployment_Vs_Cost_Spain.png')
 
 
 
 def main():
-    inflationvsprice()
-    unemploymentvsprice()
-    inflationchangevsprice()
-    gdpvsprice()
+    inflation_vs_price()
+    unemployment_vs_price()
+    inflation_change_vs_price()
+    gdp_vs_price()
 
 if __name__ == '__main__':
     main()

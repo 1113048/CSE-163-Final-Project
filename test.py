@@ -8,6 +8,10 @@ import os
 
 
 def test_load_data():
+    '''
+    This method tests the
+    load_data.
+    '''
     data = question0.load_data()
     assert_equals(['Year', 'Average price', 'Inflation adjusted price (2023 dollars)'], list(data.columns))
 
@@ -23,6 +27,11 @@ def test_load_and_merge():
 
 
 def check_plots():
+    '''
+    This method tests if the correct output
+    plot is occuring for each method that 
+    plots data. 
+    '''
     assert_equals(True, compare_plots('plots/InflationVsCostSpain.png', 'expected/InflationVsCostSpain.png'))
     assert_equals(True, compare_plots('plots/InflationChangeVsCost.png', 'expected/InflationChangeVsCost.png'))
     assert_equals(True, compare_plots('plots/GDPvsCostSpain.png', 'expected/GDPvsCostSpain.png'))
@@ -38,6 +47,10 @@ predictor = question2.BreadPredictor()
 BREAD_PRICE, GDP, IMPORTS, INFLATION, UNEMPLOYMENT, WAGE, EXPORTS = predictor.load_data()
 
 def test_ML_load_data():
+    '''
+    This method tests the load_data function
+    for the machine learning model.
+    '''
     assert_equals(BREAD_PRICE.shape, (759, 2))
     assert_equals(GDP.shape, (759, 2))
     assert_equals(IMPORTS.shape, (759, 2))
@@ -70,5 +83,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
