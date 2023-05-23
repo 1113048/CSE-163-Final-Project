@@ -86,6 +86,7 @@ if __name__ == "__main__":
   import matplotlib.pyplot as plt
   plt.style.use("seaborn-darkgrid")
   fig, ax = plt.subplots(3,2)
+  fig.tight_layout(h_pad=2)
   ax[0,0].plot(GDP["GDP"],color="red")
   ax[0,0].set_title("GDP")
   ax[0,1].plot(IMPORTS["IMPORTS"], color='green')
@@ -98,6 +99,7 @@ if __name__ == "__main__":
   ax[2,0].set_title("Minimum Wage")
   ax[2,1].plot(UNEMPLOYMENT["UNEMPLOYMENT"], color='yellow')
   ax[2,1].set_title("Unemployment")
+  plt.subplots_adjust(top=0.85)
   plt.savefig("ShowFeatures.png")
 
   # building and fitting the model
@@ -143,6 +145,7 @@ if __name__ == "__main__":
     exports_future.append(prediction)
   
   fig, ax = plt.subplots(3,2)
+  fig.tight_layout(h_pad=2)
   ax[0,0].plot(gdp_future,color="red")
   ax[0,0].set_title("GDP Change")
   ax[0,1].plot(imports_future, color='green')
@@ -155,6 +158,7 @@ if __name__ == "__main__":
   ax[2,0].set_title("Minimum Wage Change")
   ax[2,1].plot(unemployment_future, color='yellow')
   ax[2,1].set_title("Unemployment Change")
+  plt.subplots_adjust(top=0.85)
   plt.savefig("PredictedPriceChange.png")
 
 
