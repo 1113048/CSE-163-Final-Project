@@ -103,9 +103,9 @@ if __name__ == "__main__":
   plt.savefig("MLplots/ShowFeatures.png")
 
   # building and fitting the model
-  # model = predictor.build_model()
-  # predictor.fit_save_model(model, x_train, y_train, x_test, y_test, "Model.h5")
-  # predictor.evaluate_model(model, x_test, y_test, "Model.h5")
+  model = predictor.build_model()
+  predictor.fit_save_model(model, x_train, y_train, x_test, y_test, "Model.h5")
+  predictor.evaluate_model(model, x_test, y_test, "Model.h5")
 
   # Evaluate future values
   gdp_future = []

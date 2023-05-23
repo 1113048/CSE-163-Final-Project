@@ -2,9 +2,9 @@
 import question0
 import question1
 import question2 
-import question2
 import pandas as pd
 from cse163_utils import assert_equals, compare_plots
+import os
 
 
 def test_load_data():
