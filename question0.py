@@ -19,7 +19,8 @@ def load_data():
     1980-2016_bread_price_average and returns the 
     dataframe.
     '''
-    df = pd.read_csv('datasets/1980-2016_bread_price_average.csv')
+    df = pd.read_csv('datasets/bread_price_csv.csv')
+    df.drop(['inflation_rate_%', 'inflation_rate_cumulative'], axis=1)
     return df
 
 
@@ -31,19 +32,10 @@ def show_time_periods(data):
     colors to better display areas of growth. The plot is
     saved to Bread_Price_Over_Intervals.png.
     '''
-    data['Year'] = pd.to_datetime(data['Year'], format='%Y')
-    time_periods = [
-        {'start': 1980, 'end': 1989},
-        {'start': 1989, 'end': 1991},
-        {'start': 1991, 'end': 1994},
-        {'start': 1994, 'end': 2000},
-        {'start': 2000, 'end': 2015},
-        {'start': 2015, 'end': 2016},
-    ]
-    for period in time_periods:
-        period_data = data[(data['Year'] >= str(period['start'])) & (data['Year'] <= str(period['end']))]
-        # Plotting Data
-        plt.plot(period_data['Year'], period_data['Average price'], label=f"{period['start']}-{period['end']}")
+    mask1 = data['year'] < 2016
+    data = data[mask1]
+    data = data.dropna()
+    plt.plot(data['year'], data['loaf_of_bread_price_in_actual_USD'], color='blue')
     plt.xlabel('Year') 
     plt.ylabel('Price of Bread')
     plt.legend()
